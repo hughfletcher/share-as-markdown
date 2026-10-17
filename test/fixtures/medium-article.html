@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<!-- Synthetic fixture modelled on the DOM Medium serves to a signed-in reader
+     (2024-2026 layout): obfuscated class names, data-testid hooks, a member-only
+     badge, byline with avatar/follow/read time, clap and share bars, images in
+     <picture> with srcset only (no img src), code blocks as <pre><span> with
+     <br>, a figure wrapped in role="button", tags, and the "More from" and
+     "Recommended from Medium" lists after the story. Content is invented. -->
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Building a Tiny Search Engine in 200 Lines of Python | by Jordan Lee | Better Programming | Medium</title>
+  <meta name="title" content="Building a Tiny Search Engine in 200 Lines of Python">
+  <meta property="og:title" content="Building a Tiny Search Engine in 200 Lines of Python">
+  <meta property="og:site_name" content="Medium">
+  <meta property="og:type" content="article">
+  <meta property="al:android:package" content="com.medium.reader">
+  <meta name="twitter:app:name:iphone" content="Medium">
+  <meta property="article:published_time" content="2024-02-14T16:02:11.123Z">
+  <meta name="author" content="Jordan Lee">
+  <link rel="canonical" href="https://medium.com/better-programming/building-a-tiny-search-engine-1a2b3c4d5e6f">
+  <script type="application/ld+json">{"@context":"http://schema.org","@type":"NewsArticle","headline":"Building a Tiny Search Engine in 200 Lines of Python","datePublished":"2024-02-14T16:02:11.123Z","author":{"@type":"Person","name":"Jordan Lee","url":"https://medium.com/@jordanlee"},"publisher":{"@type":"Organization","name":"Better Programming"}}</script>
+</head>
+<body>
+<div id="root"><div class="a b c"><div class="d e f g h i">
+  <div class="ab ac ad ae af">
+    <a href="/?source=post_page" aria-label="Homepage">Medium</a>
+    <div class="ag"><input type="search" placeholder="Search"></div>
+    <a href="/new-story">Write</a>
+    <a href="/m/signin">Sign in</a>
+  </div>
+
+  <div class="ah ai">
+    <article>
+      <div class="l"><div class="ab ca"><section><div><div class="fr fs ft fu fv"></div>
+        <div class="ab ca"><div class="ch bg ew ex ey ez">
+
+          <div class="speechify-ignore ab cp"><div class="gb gc"><span class="be b bf z dt">Member-only story</span></div></div>
+
+          <div>
+            <h1 id="5c8a" class="pw-post-title gf gg gh be gi gj gk gl gm" data-testid="storyTitle" data-selectable-paragraph="">Building a Tiny Search Engine in 200 Lines of Python</h1>
+          </div>
+          <div><h2 id="b1d9" class="pw-subtitle-paragraph hd ge gh be b he hf hg" data-selectable-paragraph="">Inverted indexes, tokenisation and TF-IDF ranking, without a single dependency</h2></div>
+
+          <div class="speechify-ignore ab cp"><div class="hu hv">
+            <div class="ab q">
+              <a href="/@jordanlee?source=post_page" data-testid="authorPhoto"><img alt="Jordan Lee" class="l eq by dd de cx" src="https://miro.medium.com/v2/resize:fill:88:88/1*avatar.jpeg" width="44" height="44" loading="lazy"></a>
+              <a href="/better-programming?source=post_page" data-testid="publicationPhoto"><img alt="Better Programming" src="https://miro.medium.com/v2/resize:fill:48:48/1*pub.png" width="24" height="24"></a>
+            </div>
+            <div class="bm bg l">
+              <div class="ab"><span><a class="af ag" href="/@jordanlee?source=post_page" data-testid="authorName" rel="noopener follow">Jordan Lee</a></span>
+                <span><button class="bg b bf z jb">Follow</button></span></div>
+              <div class="ab ae"><span data-testid="storyReadTime">7 min read</span><span>·</span><span data-testid="storyPublishDate">Feb 14, 2024</span></div>
+            </div>
+          </div></div>
+
+          <div class="ab co jc jd">
+            <div class="h k w"><div data-testid="headerClapButton"><button aria-label="clap"><svg width="24" height="24"></svg></button><p class="be b dv z dt"><span>1.2K</span></p></div></div>
+            <div><button aria-label="responses" class="af"><span>14</span></button></div>
+            <div><button data-testid="headerBookmarkButton" aria-label="Add to list bookmark button"><svg></svg></button></div>
+            <div><button data-testid="audioPlayButton"><p>Listen</p></button></div>
+            <div><button data-testid="headerSocialShareButton"><p>Share</p></button></div>
+          </div>
+
+          <figure class="mn mo mp mq mr ms mk ml paragraph-image"><div role="button" tabindex="0" class="mt mu fj mv bh mw"><div class="mk ml mm"><picture><source srcset="https://miro.medium.com/v2/resize:fit:640/format:webp/1*index-diagram.png 640w, https://miro.medium.com/v2/resize:fit:1100/format:webp/1*index-diagram.png 1100w, https://miro.medium.com/v2/resize:fit:1400/format:webp/1*index-diagram.png 1400w" sizes="(min-resolution: 4dppx) and (max-width: 700px) 50vw, 700px" type="image/webp"><source data-testid="og" srcset="https://miro.medium.com/v2/resize:fit:640/1*index-diagram.png 640w, https://miro.medium.com/v2/resize:fit:1400/1*index-diagram.png 1400w" sizes="700px"><img alt="Diagram of an inverted index mapping words to document IDs" class="bh lr mx c" width="700" height="394" loading="eager" role="presentation"></picture></div></div><figcaption class="my fe mz mk ml na nb be b bf z dt" data-selectable-paragraph="">An inverted index maps each term to the documents that contain it.</figcaption></figure>
+
+          <p id="a7f1" class="pw-post-body-paragraph nc nd gh ne b nf ng nh" data-selectable-paragraph="">Full-text search feels like magic until you build one. In this article we will write a working search engine over a folder of text files using nothing but the Python standard library. It will not replace <a class="af nn" href="https://www.elastic.co/elasticsearch" rel="noopener ugc nofollow" target="_blank">Elasticsearch</a>, but it will show you exactly what Elasticsearch is doing.</p>
+
+          <h1 id="3e2b" class="no np gh be nq nr ns nt" data-selectable-paragraph="">Step 1: Tokenising text</h1>
+
+          <p id="9c41" class="pw-post-body-paragraph nc nd gh ne b nf ng nh" data-selectable-paragraph="">Before we can index anything we need to split documents into <strong class="ne gi">terms</strong>. We lowercase everything, strip punctuation and drop a handful of <em class="ok">stop words</em> such as <code class="cx ol om on oo b">the</code> and <code class="cx ol om on oo b">and</code>.</p>
+
+          <pre class="oq or os ot ou ov ow ox bp oy bb"><span id="f3a2" class="oz pa gh ow b bf pb pc l pd pe" data-code-block-mode="2" spellcheck="false" data-code-block-lang="python"><span class="hljs-keyword">import</span> re<br><br>STOP_WORDS = {<span class="hljs-string">"the"</span>, <span class="hljs-string">"and"</span>, <span class="hljs-string">"a"</span>, <span class="hljs-string">"of"</span>}<br><br><span class="hljs-keyword">def</span> <span class="hljs-title.function">tokenize</span>(<span class="hljs-params">text</span>):<br>    words = re.findall(<span class="hljs-string">r"[a-z0-9]+"</span>, text.lower())<br>    <span class="hljs-keyword">return</span> [w <span class="hljs-keyword">for</span> w <span class="hljs-keyword">in</span> words <span class="hljs-keyword">if</span> w <span class="hljs-keyword">not</span> <span class="hljs-keyword">in</span> STOP_WORDS]</span></pre>
+
+          <h1 id="77de" class="no np gh be nq nr ns nt" data-selectable-paragraph="">Step 2: Building the index</h1>
+
+          <p id="1b0c" class="pw-post-body-paragraph nc nd gh ne b nf ng nh" data-selectable-paragraph="">The index is a dictionary from each term to the set of documents containing it. Three rules keep it simple:</p>
+
+          <ol class=""><li id="c001" class="nc nd gh ne b nf ng pf pg ph bk" data-selectable-paragraph="">Every document gets an integer ID.</li><li id="c002" class="nc nd gh ne b nf ng pf pg ph bk" data-selectable-paragraph="">Terms are stored after tokenising, never raw.</li><li id="c003" class="nc nd gh ne b nf ng pf pg ph bk" data-selectable-paragraph="">We also record how often each term appears, for ranking later.</li></ol>
+
+          <blockquote class="pi pj pk"><p id="e5d1" class="nc nd pl ne b nf ng" data-selectable-paragraph="">An index is just a precomputed answer to the question “where does this word appear?”</p></blockquote>
+
+          <h2 id="0aa1" class="pm np gh be nq pn po" data-selectable-paragraph="">Ranking with TF-IDF</h2>
+
+          <p id="2f9e" class="pw-post-body-paragraph nc nd gh ne b nf ng nh" data-selectable-paragraph="">Term frequency rewards documents that mention a term often; inverse document frequency penalises terms that appear everywhere. Multiply them and you get a surprisingly good relevance score.</p>
+
+          <pre class="oq or os ot ou ov ow ox bp oy bb"><span id="6d10" class="oz pa gh ow b bf pb pc l pd pe" data-code-block-mode="1" spellcheck="false" data-code-block-lang="python"><span class="hljs-keyword">def</span> <span class="hljs-title.function">idf</span>(<span class="hljs-params">term, index, total</span>):<br>    <span class="hljs-keyword">return</span> math.log(total / (<span class="hljs-number">1</span> + <span class="hljs-built_in">len</span>(index[term])))</span></pre>
+
+          <p id="8b7a" class="pw-post-body-paragraph nc nd gh ne b nf ng nh" data-selectable-paragraph="">The complete code is on <a class="af nn" href="https://github.com/example/tiny-search" rel="noopener ugc nofollow" target="_blank">GitHub</a>. Thanks for reading!</p>
+
+        </div></div>
+      </section></div></div>
+
+      <div class="ab ca"><div class="ch bg">
+        <div class="pz qa ab il"><a href="/tag/python?source=post_page" rel="noopener follow"><div class="qb fe">Python</div></a><a href="/tag/search-engines?source=post_page" rel="noopener follow"><div class="qb fe">Search Engines</div></a></div>
+        <div class="ab"><div data-testid="footerClapButton"><button aria-label="clap"><svg></svg></button><span>1.2K</span></div><button aria-label="responses"><span>14</span></button></div>
+      </div></div>
+    </article>
+  </div>
+
+  <div class="ab ca">
+    <div class="qn">
+      <a href="/@jordanlee?source=post_page"><img alt="Jordan Lee" src="https://miro.medium.com/v2/resize:fill:144:144/1*avatar.jpeg" width="72" height="72"></a>
+      <h2>Written by Jordan Lee</h2>
+      <p>2.4K Followers · Writer for Better Programming</p>
+      <p>Backend engineer. I write about databases, search and the boring parts of software.</p>
+      <button>Follow</button>
+    </div>
+    <div class="qo">
+      <h2>More from Jordan Lee and Better Programming</h2>
+      <div><a href="/better-programming/why-your-sql-is-slow-9f8e7d"><h2>Why Your SQL Is Slow</h2><p>Ten query plans that explain ninety percent of performance problems.</p></a></div>
+      <div><a href="/better-programming/rust-for-pythonistas-1c2d3e"><h2>Rust for Pythonistas</h2><p>Ownership explained with Python analogies.</p></a></div>
+    </div>
+    <div class="qp">
+      <h2>Recommended from Medium</h2>
+      <div><a href="/@someone/ten-habits-4a5b6c"><h2>Ten Habits of Highly Effective Engineers</h2><p>Number seven will surprise you.</p></a></div>
+      <div><a href="/@another/the-end-of-programming-7d8e9f"><h2>The End of Programming</h2><p>Or is it?</p></a></div>
+    </div>
+  </div>
+</div></div></div>
+</body>
+</html>

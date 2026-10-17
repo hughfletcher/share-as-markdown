@@ -1,0 +1,28 @@
+{
+  "name": "web-to-markdown",
+  "version": "1.0.0",
+  "description": "Apple Shortcut that turns the Safari page you are reading into a clean Markdown file and hands it to the iOS Share Sheet.",
+  "private": true,
+  "license": "MIT",
+  "homepage": "https://github.com/hughfletcher/share-as-markdown",
+  "type": "module",
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "test": "node scripts/build.mjs && node --test test/*.test.mjs",
+    "test:update": "node scripts/build.mjs && UPDATE_SNAPSHOTS=1 node --test test/*.test.mjs",
+    "convert": "node scripts/convert.mjs"
+  },
+  "dependencies": {
+    "@mozilla/readability": "0.6.0",
+    "dompurify": "3.4.17",
+    "turndown": "7.2.4",
+    "turndown-plugin-gfm": "1.0.2"
+  },
+  "devDependencies": {
+    "esbuild": "0.28.2",
+    "jsdom": "26.1.0"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

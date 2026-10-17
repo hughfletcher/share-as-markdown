@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<!-- Synthetic fixture modelled on a developer blog: highlighted code blocks in
+     several highlighter styles (Prism, highlight.js, line-number gutters),
+     inline code, a table, nested lists and a sidebar table of contents. -->
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Debouncing vs. Throttling in JavaScript — devnotes</title>
+  <meta property="og:site_name" content="devnotes">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": "Debouncing vs. Throttling in JavaScript",
+    "datePublished": "2024-11-03",
+    "author": [{ "@type": "Person", "name": "Sam Okafor" }]
+  }
+  </script>
+</head>
+<body>
+  <nav class="topbar"><a href="/">devnotes</a> <a href="/archive">Archive</a> <a href="/rss.xml">RSS</a></nav>
+  <div class="layout">
+    <aside class="toc">
+      <h4>On this page</h4>
+      <ul><li><a href="#debounce">Debounce</a></li><li><a href="#throttle">Throttle</a></li><li><a href="#compare">Comparison</a></li></ul>
+    </aside>
+    <main>
+      <article class="post">
+        <h1>Debouncing vs. Throttling in JavaScript</h1>
+        <p class="meta">Sam Okafor · 3 November 2024 · 6 min read</p>
+
+        <p>Scroll, resize and input events can fire dozens of times per second. Running expensive work on every event makes interfaces feel sluggish, so we usually wrap the handler in either a <code>debounce</code> or a <code>throttle</code> helper. They sound similar but behave very differently.</p>
+
+        <h2 id="debounce">Debounce</h2>
+
+        <p>A debounced function waits until calls <strong>stop</strong> for a given delay, then runs once. It is ideal for search-as-you-type:</p>
+
+        <pre class="language-javascript"><code class="language-javascript"><span class="token keyword">function</span> <span class="token function">debounce</span><span class="token punctuation">(</span>fn<span class="token punctuation">,</span> delay <span class="token operator">=</span> <span class="token number">250</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">let</span> timer<span class="token punctuation">;</span>
+  <span class="token keyword">return</span> <span class="token punctuation">(</span><span class="token operator">...</span>args<span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+    <span class="token function">clearTimeout</span><span class="token punctuation">(</span>timer<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    timer <span class="token operator">=</span> <span class="token function">setTimeout</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token function">fn</span><span class="token punctuation">(</span><span class="token operator">...</span>args<span class="token punctuation">)</span><span class="token punctuation">,</span> delay<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment">// Usage: only search after the user pauses typing</span>
+input<span class="token punctuation">.</span><span class="token function">addEventListener</span><span class="token punctuation">(</span><span class="token string">'input'</span><span class="token punctuation">,</span> <span class="token function">debounce</span><span class="token punctuation">(</span>search<span class="token punctuation">,</span> <span class="token number">300</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
+
+        <h2 id="throttle">Throttle</h2>
+
+        <p>A throttled function runs at most once per interval, no matter how often it is called. Use it for scroll position tracking. Here is a TypeScript version rendered with a line-number gutter:</p>
+
+        <div class="highlight">
+          <table class="highlighttable"><tr>
+            <td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9</pre></div></td>
+            <td class="code"><div class="highlight"><pre class="hljs language-ts"><span class="hljs-keyword">export</span> <span class="hljs-keyword">function</span> <span class="hljs-title">throttle</span>&lt;T <span class="hljs-keyword">extends</span> <span class="hljs-built_in">unknown</span>[]&gt;(fn: <span class="hljs-function">(<span class="hljs-params">...args: T</span>) =&gt;</span> <span class="hljs-built_in">void</span>, ms: <span class="hljs-built_in">number</span>) {
+  <span class="hljs-keyword">let</span> last = <span class="hljs-number">0</span>;
+  <span class="hljs-keyword">return</span> <span class="hljs-function">(<span class="hljs-params">...args: T</span>) =&gt;</span> {
+    <span class="hljs-keyword">const</span> now = <span class="hljs-built_in">Date</span>.now();
+    <span class="hljs-keyword">if</span> (now - last &lt; ms) <span class="hljs-keyword">return</span>;
+    last = now;
+    fn(...args);
+  };
+}</pre></div></td>
+          </tr></table>
+        </div>
+
+        <p>Some highlighters emit one element per line instead of newline characters:</p>
+
+        <pre data-lang="bash"><div class="line">npm install lodash.debounce lodash.throttle</div><div class="line">npm test -- --watch</div></pre>
+
+        <p>And a block that itself contains Markdown fences, which must not break the output:</p>
+
+        <pre><code class="language-markdown">Use triple backticks:
+
+```js
+console.log("hi");
+```</code></pre>
+
+        <h2 id="compare">Comparison</h2>
+
+        <table>
+          <tr><th>Helper</th><th>Runs when</th><th>Good for</th></tr>
+          <tr><td><code>debounce</code></td><td>Calls stop for <em>delay</em> ms</td><td>Search boxes, autosave</td></tr>
+          <tr><td><code>throttle</code></td><td>At most once per <em>ms</em></td><td>Scroll, resize, pointer move</td></tr>
+        </table>
+
+        <p>Things to remember:</p>
+        <ul>
+          <li>Both helpers return a <em>new</em> function; keep a reference if you need to remove the listener.
+            <ul>
+              <li>Calling <code>debounce(fn)</code> inside a render loop creates a new timer each time.</li>
+              <li>In React, wrap it in <code>useMemo</code> or <code>useRef</code>.</li>
+            </ul>
+          </li>
+          <li>Prefer <code>requestAnimationFrame</code> for purely visual updates.</li>
+        </ul>
+
+        <p>Further reading: the <a href="https://developer.mozilla.org/en-US/docs/Glossary/Debounce">MDN glossary entry</a> and <a href="/posts/raf">my post on requestAnimationFrame</a>.</p>
+      </article>
+    </main>
+  </div>
+  <footer><p>devnotes · <a href="/about">About</a></p></footer>
+</body>
+</html>
