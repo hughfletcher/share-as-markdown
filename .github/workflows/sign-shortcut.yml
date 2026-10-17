@@ -1,0 +1,30 @@
+name: sign-shortcut (experiment)
+
+# Tries Apple's `shortcuts sign` on a GitHub-hosted Mac. Signing may require a
+# signed-in Apple account, which these runners do not have.
+on:
+  push:
+    branches: [sign-experiment]
+  workflow_dispatch:
+
+jobs:
+  sign:
+    runs-on: macos-15
+    steps:
+      - uses: actions/checkout@v4
+      - run: sw_vers; which shortcuts || true
+      - name: Sign (XML plist)
+        continue-on-error: true
+        run: shortcuts sign --mode anyone --input dist/web-to-markdown-unsigned.shortcut --output "Web to Markdown.shortcut"
+      - name: Sign (binary plist)
+        if: ${{ hashFiles('Web to Markdown.shortcut') == '' }}
+        continue-on-error: true
+        run: |
+          plutil -convert binary1 -o unsigned.shortcut dist/web-to-markdown-unsigned.shortcut
+          shortcuts sign --mode anyone --input unsigned.shortcut --output "Web to Markdown.shortcut"
+      - run: ls -la; head -c 4 "Web to Markdown.shortcut" | od -c || true
+      - uses: actions/upload-artifact@v4
+        with:
+          name: signed-shortcut
+          path: Web to Markdown.shortcut
+          if-no-files-found: warn
