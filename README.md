@@ -64,7 +64,7 @@ Choose one of these:
 
 **A. Build it by hand on your iPhone (no Mac needed, about 5 minutes).**
 Follow [docs/manual-setup.md](docs/manual-setup.md). You paste the script
-into a *Run JavaScript on Web Page* action and add six simple actions around
+into a *Run JavaScript on Web Page* action and add a few simple actions around
 it.
 
 **B. Import the `.shortcut` file (needs a Mac once).** iOS only imports

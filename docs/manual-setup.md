@@ -58,15 +58,23 @@ search bar.
    To pick *Result of JavaScript*, tap the dictionary field, choose
    **Select Variable**, and tap the output of the Run JavaScript action.
 
-5. **Get Dictionary Value**: *Get **Value** for **filename** in **Result of JavaScript***.
+5. **Set Variable**: set variable **Markdown** to **Dictionary Value**.
+   Type the name `Markdown` yourself.
 
-6. **Set Name**: *Set name of **[Dictionary Value (markdown)]** to **[Dictionary Value (filename)]***.
-   - Use *Select Variable* to pick the right Dictionary Value for each field.
-     The first one is the markdown value from step 4. The second is the
-     filename value from step 5.
+6. **Get Dictionary Value**: *Get **Value** for **filename** in **Result of JavaScript***.
+   Pick *Result of JavaScript* the same way as in step 4.
+
+7. **Set Variable**: set variable **Filename** to **Dictionary Value**.
+
+8. **Set Name**: *Set name of **Markdown** to **Filename***.
+   - Tap each field, choose **Select Variable**, and tap the variable with
+     that name. Both fields should show a variable bubble, not typed text.
    - Tap the expand arrow (›) and make sure **Don't Include File Extension** is **off**.
 
-7. **Share**: *Share **Renamed Item***.
+9. **Share**: *Share **Renamed Item***.
+   - Tap the field and pick **Renamed Item**, the output of Set Name. If it
+     says *Markdown* or *Dictionary Value*, Telegram receives plain text
+     instead of a file.
 
 Tap **Done**. The shortcut is finished.
 
@@ -77,6 +85,20 @@ isn't in the list, scroll down and tap **Edit Actions…** to add it to your
 favourites. The first time you use it on each website, iOS asks whether the
 shortcut may access that site. Choose **Allow**. A Share Sheet then opens with
 the `.md` file.
+
+## If the file arrives as "Text"
+
+If Telegram or Files gets a file named **Text** (no title, no `.md`), the
+shortcut is sharing the raw text instead of the named file, and Telegram
+may fail on the next share. Open the shortcut and check:
+
+1. **Share** says *Share **Renamed Item***, not *Markdown* or *Dictionary Value*.
+2. **Set Name** says *Set name of **Markdown** to **Filename***, both as
+   variable bubbles.
+3. **Don't Include File Extension** under Set Name is **off**.
+
+To see the file before sharing, temporarily add **Quick Look** between
+Set Name and Share. The title bar should show `<Article title>.md`.
 
 ## Updating
 
